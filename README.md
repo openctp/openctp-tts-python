@@ -3,7 +3,7 @@
         <img src="https://badgen.net/badge/tts/6.3.15|6.3.19|6.5.1|6.6.1|6.6.7|6.6.9/cyan" />
     </a>       
     <a href="#">         
-        <img src="https://badgen.net/badge/platform/windows|linux/cyan" />  
+        <img src="https://badgen.net/badge/platform/windows_x64|linux_x64/cyan" />  
     </a>        
     <a href="#">     
         <img src="https://badgen.net/badge/python/3.7|3.8|3.9|3.10|3.11/cyan" />          
@@ -85,8 +85,8 @@ td_api = tdapi.CThostFtdcTraderApi.CreateFtdcTraderApi('user_id')
     - 6.6.9_20220920
 - 支持多版本 Python (3.7 ~ 3.11)
 - 支持多平台
-    - Windows
-    - Linux
+    - Windows_x64
+    - Linux_x64
 
 ## 核心:art:
 
