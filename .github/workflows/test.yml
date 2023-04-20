@@ -12,35 +12,35 @@ on: [ workflow_dispatch ]
 
 jobs:
 
-#  build-linux:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Checkout openctp-tts-667
-#        uses: actions/checkout@v3
-#        with:
-#          repository: Jedore/openctp-tts-667
-#          path: openctp-tts-667
-#      - name: Set up Python 3.11
-#        uses: actions/setup-python@v3
-#        with:
-#          python-version: "3.11"
-#      - name: Generate projects files
-#        run: python templates/sync.py 667
-#      - name: Install dependencies
-#        run: |
-#          pip install -r requirements.txt
-#      - name: Building Package
-#        working-directory: openctp-tts-667
-#        run: |
-#          export CIBW_REPAIR_WHEEL_COMMAND=
-#          python -m cibuildwheel --platform linux --output-dir ../dist
-#        shell: bash
-#      - name: Store Package
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: python-package-distribution
-#          path: dist
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout openctp-tts-667
+        uses: actions/checkout@v3
+        with:
+          repository: Jedore/openctp-tts-667
+          path: openctp-tts-667
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+      - name: Generate projects files
+        run: python templates/sync.py 667
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Building Package
+        working-directory: openctp-tts-667
+        run: |
+          export CIBW_REPAIR_WHEEL_COMMAND=
+          python -m cibuildwheel --platform linux --output-dir ../dist
+        shell: bash
+      - name: Store Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-package-distribution
+          path: dist
 
 
   #  build-windows:
@@ -74,34 +74,34 @@ jobs:
   #          path: dist
 
 
-#  publish-wheel:
-#    needs:
-#      - build-linux
-#    #      - build-windows
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Set up Python 3.11
-#        uses: actions/setup-python@v3
-#        with:
-#          python-version: 3.11
-#      - name: Install dependencies
-#        run: |
-#          pip install hatch
-#      - name: Download Package
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: python-package-distribution
-#          path: dist/
-#      - name: Publish a Python distribution to Test PyPI
-#        uses: pypa/gh-action-pypi-publish@release/v1
-#        with:
-#          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-#          repository-url: https://test.pypi.org/legacy/
+  publish-wheel:
+    needs:
+      - build-linux
+    #      - build-windows
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          pip install hatch
+      - name: Download Package
+        uses: actions/download-artifact@v3
+        with:
+          name: python-package-distribution
+          path: dist/
+      - name: Publish a Python distribution to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository-url: https://test.pypi.org/legacy/
 
 
   test-linux:
-#    needs:
-#      - publish-wheel
+    needs:
+      - publish-wheel
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -123,7 +123,7 @@ jobs:
           sudo locale-gen zh_CN.GB18030
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install -r pytest
       - name: Generate projects files
         run: python templates/sync.py 667
       - name: Install openctp-tts-667
@@ -152,7 +152,7 @@ jobs:
 #          python-version: ${{ matrix.python-version }}
 #      - name: Install dependencies
 #        run: |
-#          pip install -r requirements.txt
+#          pip install -r pytest
 #      - name: Generate projects files
 #        run: python templates/sync.py 667
 #      - name: Install openctp-tts-667
