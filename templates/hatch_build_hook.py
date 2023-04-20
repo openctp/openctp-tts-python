@@ -10,7 +10,7 @@ class CustomBuildHook(BuildHookInterface):
     def initialize(self, version: str, build_data: Dict[str, Any]) -> None:
         cur_dir = os.getcwd()
         libs_dir = os.path.join(cur_dir, 'libs')
-        target_dir = 'openctp_ctp_CTP_VERSION'
+        target_dir = 'openctp_tts_CTP_VERSION'
 
         build_data['pure_python'] = False
         build_data['infer_tag'] = True
