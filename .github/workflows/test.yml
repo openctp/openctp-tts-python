@@ -127,7 +127,7 @@ jobs:
       - name: Generate projects files
         run: python templates/sync.py 667
       - name: Install openctp-tts-667
-        run: pip install -i https://test.pypi.org/simple/ openctp-tts-667==0.0.2
+        run: pip install -i https://test.pypi.org/simple/ openctp-tts-667==0.0.3
       - name: Test
         working-directory: openctp-tts-667
         run: pytest tests
