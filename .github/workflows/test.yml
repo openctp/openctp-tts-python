@@ -43,41 +43,41 @@ jobs:
           path: dist
 
 
-  #  build-windows:
-  #    runs-on: windows-latest
-  #    steps:
-  #      - uses: actions/checkout@v3
-  #      - name: Checkout openctp-tts-667
-  #        uses: actions/checkout@v3
-  #        with:
-  #          repository: Jedore/openctp-tts-667
-  #          path: openctp-tts-667
-  #      - name: Set up Python 3.11
-  #        uses: actions/setup-python@v3
-  #        with:
-  #          python-version: "3.11"
-  #      - name: Generate projects files
-  #        run: python templates/sync.py 667
-  #      - name: Install dependencies
-  #        run: |
-  #          pip install -r requirements.txt
-  #      - name: Building Package
-  #        working-directory: openctp-tts-667
-  #        run: |
-  #          export CIBW_REPAIR_WHEEL_COMMAND=
-  #          python -m cibuildwheel --platform windows --output-dir ../dist
-  #        shell: bash
-  #      - name: Store Package
-  #        uses: actions/upload-artifact@v3
-  #        with:
-  #          name: python-package-distribution
-  #          path: dist
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout openctp-tts-667
+        uses: actions/checkout@v3
+        with:
+          repository: Jedore/openctp-tts-667
+          path: openctp-tts-667
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+      - name: Generate projects files
+        run: python templates/sync.py 667
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Building Package
+        working-directory: openctp-tts-667
+        run: |
+          export CIBW_REPAIR_WHEEL_COMMAND=
+          python -m cibuildwheel --platform windows --output-dir ../dist
+        shell: bash
+      - name: Store Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-package-distribution
+          path: dist
 
 
   publish-wheel:
     needs:
       - build-linux
-    #      - build-windows
+      - build-windows
     runs-on: ubuntu-latest
     steps:
       - name: Set up Python 3.11
@@ -132,31 +132,31 @@ jobs:
         working-directory: openctp-tts-667
         run: pytest tests
 
-#  test-windows:
-#    needs:
-#      - publish-wheel
-#    runs-on: windows-latest
-#    strategy:
-#      matrix:
-#        python-version: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: Checkout openctp-tts-667
-#        uses: actions/checkout@v3
-#        with:
-#          repository: Jedore/openctp-tts-667
-#          path: openctp-tts-667
-#      - name: Set up Python ${{ matrix.python-version }}
-#        uses: actions/setup-python@v3
-#        with:
-#          python-version: ${{ matrix.python-version }}
-#      - name: Install dependencies
-#        run: |
-#          pip install pytest
-#      - name: Generate projects files
-#        run: python templates/sync.py 667
-#      - name: Install openctp-tts-667
-#        run: pip install -i https://test.pypi.org/simple/ openctp-tts-667
-#      - name: Test
-#        working-directory: openctp-tts-667
-#        run: pytest tests
+  test-windows:
+    needs:
+      - publish-wheel
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        python-version: [ "3.7", "3.8", "3.9", "3.10", "3.11" ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout openctp-tts-667
+        uses: actions/checkout@v3
+        with:
+          repository: Jedore/openctp-tts-667
+          path: openctp-tts-667
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          pip install pytest
+      - name: Generate projects files
+        run: python templates/sync.py 667
+      - name: Install openctp-tts-667
+        run: pip install -i https://test.pypi.org/simple/ openctp-tts-667
+      - name: Test
+        working-directory: openctp-tts-667
+        run: pytest tests
