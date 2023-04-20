@@ -32,10 +32,7 @@ class CMdSpiImpl(api.CThostFtdcMdSpi):
 def test_mdapi():
     # Success if at least 1 md front success.
     md_fronts = (
-        'tcp://180.168.146.187:10131',
-        'tcp://180.168.146.187:10211',
-        'tcp://180.168.146.187:10212',
-        'tcp://180.168.146.187:10213',
+        'tcp://121.37.80.177:20004',
     )
     error = None
     for md_front in md_fronts:

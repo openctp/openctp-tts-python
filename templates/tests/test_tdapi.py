@@ -1,7 +1,4 @@
-import importlib
 from queue import Queue
-
-import pytest
 
 Q_CONNECT = Queue(maxsize=1)
 Q_AUTH = Queue(maxsize=1)
@@ -40,10 +37,9 @@ class CTdSpiImpl(api.CThostFtdcTraderSpi):
 def test_tdapi():
     # Success if at least 1 md front success.
     td_fronts = (
-        'tcp://180.168.146.187:10130',
-        'tcp://180.168.146.187:10201',
-        'tcp://180.168.146.187:10202',
-        'tcp://180.168.146.187:10203',
+        'tcp://121.37.80.177:20002',
+        'tcp://121.37.90.193:20002',
+        'tcp://42.192.226.242:20002',
     )
     error = None
     for td_front in td_fronts:
