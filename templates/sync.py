@@ -72,14 +72,12 @@ if __name__ == '__main__':
     os.mkdir(target_file('tests'))
     with open(src_file('tests', 'test_mdapi.py'), 'r') as file_obj:
         text = file_obj.read()
-    new_text = text.replace('CTP_VERSION2', version)
-    new_text = new_text.replace('CTP_VERSION', ctp_version)
+    new_text = text.replace('CTP_VERSION', ctp_version)
     with open(target_file('tests', 'test_mdapi.py'), 'w') as file_obj:
         file_obj.write(new_text)
 
     with open(src_file('tests', 'test_tdapi.py'), 'r') as file_obj:
         text = file_obj.read()
-    new_text = text.replace('CTP_VERSION2', version)
-    new_text = new_text.replace('CTP_VERSION', ctp_version)
+    new_text = text.replace('CTP_VERSION', ctp_version)
     with open(target_file('tests', 'test_tdapi.py'), 'w') as file_obj:
         file_obj.write(new_text)

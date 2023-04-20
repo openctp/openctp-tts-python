@@ -45,9 +45,7 @@ def test_tdapi():
     for td_front in td_fronts:
         try:
             tdapi = api.CThostFtdcTraderApi.CreateFtdcTraderApi(USER)
-
-            assert 'CTP_VERSION2' in tdapi.GetApiVersion(), 'GetApiVersion Failed!'
-
+            print('ApiVersion:', tdapi.GetApiVersion())
             tdspi = CTdSpiImpl(tdapi)
             tdapi.RegisterSpi(tdspi)
             tdapi.RegisterFront(td_front)

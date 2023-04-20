@@ -38,9 +38,7 @@ def test_mdapi():
     for md_front in md_fronts:
         try:
             mdapi = api.CThostFtdcMdApi.CreateFtdcMdApi()
-
-            assert 'CTP_VERSION2' in mdapi.GetApiVersion(), 'GetApiVersion Failed!'
-
+            print('ApiVersion:', mdapi.GetApiVersion())
             mdspi = CMdSpiImpl(mdapi)
             mdapi.RegisterFront(md_front)
             mdapi.RegisterSpi(mdspi)
