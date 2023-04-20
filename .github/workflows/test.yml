@@ -123,11 +123,11 @@ jobs:
           sudo locale-gen zh_CN.GB18030
       - name: Install dependencies
         run: |
-          pip install -r pytest
+          pip install pytest
       - name: Generate projects files
         run: python templates/sync.py 667
       - name: Install openctp-tts-667
-        run: pip install -i https://test.pypi.org/simple/ openctp-tts-667==0.0.3
+        run: pip install -i https://test.pypi.org/simple/ openctp-tts-667
       - name: Test
         working-directory: openctp-tts-667
         run: pytest tests
@@ -152,7 +152,7 @@ jobs:
 #          python-version: ${{ matrix.python-version }}
 #      - name: Install dependencies
 #        run: |
-#          pip install -r pytest
+#          pip install pytest
 #      - name: Generate projects files
 #        run: python templates/sync.py 667
 #      - name: Install openctp-tts-667
